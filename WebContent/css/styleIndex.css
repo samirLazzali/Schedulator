@@ -1,0 +1,8 @@
+@CHARSET "UTF-8";
+
+/* # = id ; . = class */
+
+.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
