@@ -9,4 +9,15 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+   <servlet>
+    <servlet-name>CreatEdt</servlet-name>
+    <servlet-class>schedPack.CreateEdt</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+	<servlet-name>CreatEdt</servlet-name>
+	<url-pattern>/creation</url-pattern>
+</servlet-mapping>
+
 </web-app>

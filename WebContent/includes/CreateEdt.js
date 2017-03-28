@@ -43,7 +43,6 @@ function createAddParam(){
 	input.id = "addParamName";
 	input.className = "form-control";
 	$(input).appendTo($(divLabInput));
-	//manque le placeholder !
 	//ajout du div (l + i) au div principal 
 	$(divLabInput).appendTo($(divAddParam));
 
@@ -88,7 +87,7 @@ function refreshListBloc(){
 }
 
 function refreshListHoraire(){
-	
+
 	var divListBlocAffichage = document.createElement('div');
 	for (i = 0; i < listeHoraire.length ; i++){
     	var x = document.createElement("li");
@@ -105,41 +104,42 @@ function refreshListHoraire(){
 
 //changement du combobox
 function changeCombo(){
-	
+	listeHoraire = [];
+	//supprimer le div de cration de bloc
 	if(document.getElementById("createBloc") != null){
 		document.getElementById('createBloc').remove();
 	}
+	//supprime le bouton "valider le bloc"
 	if(document.getElementById("addParamBtn") != null){
 		document.getElementById('addParamBtn').remove();
 	}
+	//supprime el bouton ajouter un creneaux
 	if(document.getElementById("addCreneauxBtn") != null){
 		document.getElementById('addCreneauxBtn').remove();
 	}
 	
+	//on recuper le choix du combo box
     var x = document.getElementById("addParamCombo").selectedIndex;
     var val = document.getElementsByTagName("option")[x].value;
     
-    switch (val) {
+    switch (val) { //en fonction du choix du combo box :
 	case "fixe":
-		
 		$("#addParamCombo").after(blocFixe("fixe"));
-        //button validation du bloc
+        //creation du bouton de validation du bloc "valider le bloc"
     	var addParamBtn = document.createElement('input');
     	addParamBtn.id = "addParamBtn";
     	addParamBtn.type = "button";
     	addParamBtn.value = "Valider le bloc";
     	addParamBtn.onclick = function(){submitBloc();};
     	$(addParamBtn).appendTo($(addParam));
-	    
 		break;
+		
 	case "choix":
 		$("#addParamCombo").after(blocFixe("fixechoix"));
         //button validation du crenaux
     	
-		
 		break;
 	case "libre":
-		//alert("librette");
 		$("#addParamCombo").after(blocFixe("libre"));
 
 		break;
@@ -152,8 +152,7 @@ function changeCombo(){
 
 //clic pour valider la saisie du bloc
 function submitBloc(){
-	addCreneaux();
-
+	addCreneaux("validation");
 	var blocNom = document.getElementById("addParamName").value;
 	var blocDuree = document.getElementById("duree").value;
 	var z = listDeBloc.length;
@@ -190,18 +189,22 @@ function validationRedirect(){
 			stringTmp += "-";
 		}
 		stringBlocs += stringTmp;
+		stringTmp = "";
 		stringBlocs += ";";
 	}
 	
 	var f = document.createElement("form");
 	f.setAttribute('method',"post");
 	f.setAttribute('action',"CreateEdt");
+	f.style.display = "none";
 
 	var i = document.createElement("input"); //input element, text
 	i.setAttribute('type',"text");
 	i.setAttribute('name',"stringBlocs");
 	i.setAttribute('value',stringBlocs);
+	i.style.display = "none";
 	f.appendChild(i);
+	document.body.append(f);
 	f.submit();
 
 }
@@ -209,21 +212,51 @@ function validationRedirect(){
 
 //addCreneaux ("fixe") => pour ajouter hdeb hfin et jour a la liste 
 //addcreneaux("choix") => pour ajouter plusieur crenaux
+//"validation" => ne remplis pas al list d'ho
 function addCreneaux(type){
-	//incremente une liste d'horaire
-	// et permet d'en ajouter une autre
-	if (document.getElementById("heureDebut") != null){
-		var heureDebutInput = document.getElementById("heureDebut").value;
-		var heureFinInput = document.getElementById("heureFin").value;
+
+	
+	if(document.getElementById("heureDebutH") != null && type == "validation"){
+		var heureDebutInputH = document.getElementById("heureDebutH").value;
+		var heureDebutInputMin = document.getElementById("heureDebutMin").value;
+
+		var heureFinInputH = document.getElementById("heureFinH").value;
+		var heureFinInputMin  = document.getElementById("heureFinMin").value;
+
 		var e = document.getElementById("blocFixeCombo");
 	    var jour = e.options[e.selectedIndex].value;
 	    
 		//+ selecteed index
-		listeHoraire.push(heureDebutInput, heureFinInput, jour);
+	    var strDeb = heureDebutInputH+"H"+heureDebutInputMin;
+	    var strFin = heureFinInputH+"H"+heureFinInputMin;
+
+	    listeHoraire.push(strDeb, strFin, jour);
+		    
 		refreshListHoraire();
 	}
+	
+	
+	
+
 
 	if (type == "choix"){
+		var heureDebutInputH = document.getElementById("heureDebutH").value;
+		var heureDebutInputMin = document.getElementById("heureDebutMin").value;
+
+		var heureFinInputH = document.getElementById("heureFinH").value;
+		var heureFinInputMin  = document.getElementById("heureFinMin").value;
+
+		var e = document.getElementById("blocFixeCombo");
+	    var jour = e.options[e.selectedIndex].value;
+	    
+		//+ selecteed index
+	    var strDeb = heureDebutInputH+"H"+heureDebutInputMin;
+	    var strFin = heureFinInputH+"H"+heureFinInputMin;
+
+	    listeHoraire.push(strDeb, strFin, jour);
+		    
+		refreshListHoraire();
+		
 		document.getElementById('divLabInputHeureDebut').remove();
 		document.getElementById('divLabInputHeureFin').remove();
 		document.getElementById('divSelectblocFixe').remove();
@@ -249,7 +282,9 @@ function addCreneaux(type){
 		addParamBtn.onclick = function(){submitBloc();};
 		$("#brCreneaux").after($(addParamBtn));
 			
-	};
+	}else{
+		
+	}
 	
 
 	

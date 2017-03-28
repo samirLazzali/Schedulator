@@ -4,6 +4,7 @@
  * si type == fixe => duree + hdeb + hfin + jour
  * si type == choix => hdeb + hfin + jour + btn
  * si type == fixechoix => duree + hdeb + hfin + jour + btn
+ * 		      libre
  */
 //pour le bloc fixe : 
 function blocFixe(type){
@@ -34,9 +35,10 @@ function blocFixe(type){
 		$(label).appendTo($(divLabInputDuree));
 		//input
 		var input = document.createElement('input');
-		input.type = 'text';
+		input.type = 'number';
 		input.id = "duree";
 		input.className = "form-control";
+
 		$(input).appendTo($(divLabInputDuree));
 		//manque le placeholder !
 		//ajout du div (l + i) au div principal 
@@ -45,8 +47,6 @@ function blocFixe(type){
 		var divListHoraire = document.createElement('div');
 		divListHoraire.id = 'divListHoraire';
 		$(divListHoraire).appendTo($(divBlocFixe));
-		
-        
 
 	}
 
@@ -65,11 +65,27 @@ function blocFixe(type){
 	}
 	$(label).appendTo($(divLabInputHeureDebut));
 	//input
+	var divNum1 = document.createElement('div');
+	divNum1.className = "row";
+	
 	var input = document.createElement('input');
-	input.type = 'text';
-	input.id = "heureDebut";
-	input.className = "form-control";
-	$(input).appendTo($(divLabInputHeureDebut));
+	input.type = 'number';
+	input.id = "heureDebutH";
+	input.min= '0';
+	input.max="23";
+	input.step ="1";
+
+	$(input).appendTo($(divNum1));
+	divNum1.append("H");
+	var input = document.createElement('input');
+	input.type = 'number';
+	input.id = "heureDebutMin";
+	input.min= '0';
+	input.max="45";
+	input.step ="15";
+	$(input).appendTo($(divNum1));
+
+	$(divNum1).appendTo($(divLabInputHeureDebut));
 	//manque le placeholder !
 	//ajout du div (l + i) au div principal 
 	$(divLabInputHeureDebut).appendTo($(divBlocFixe));
@@ -89,12 +105,28 @@ function blocFixe(type){
 	}
 	$(label).appendTo($(divLabInputHeureFin));
 	//input
+	
+	var divNum1 = document.createElement('div');
+	divNum1.className = "row";
+	
 	var input = document.createElement('input');
-	input.type = 'text';
-	input.id = "heureFin";
-	input.className = "form-control";
-	$(input).appendTo($(divLabInputHeureFin));
-	//manque le placeholder !
+	input.type = 'number';
+	input.id = "heureFinH";
+	input.min= '0';
+	input.max="23";
+	input.step ="1";
+	$(input).appendTo($(divNum1));
+	divNum1.append("H");
+	var input = document.createElement('input');
+	input.type = 'number';
+	input.id = "heureFinMin";
+	input.min= '0';
+	input.max="45";
+	input.step ="15";
+	$(input).appendTo($(divNum1));
+
+	$(divNum1).appendTo($(divLabInputHeureFin));
+	
 	$(divLabInputHeureFin).appendTo($(divBlocFixe));
 
 	var divSelect = document.createElement('div');
@@ -117,8 +149,8 @@ function blocFixe(type){
 	    option.text = selectText[i];
 	    selectList.appendChild(option);
 	}
-	$(divSelect).appendTo($(divBlocFixe)); 
 	
+	$(divSelect).appendTo($(divBlocFixe)); 
 	if (type == "choix" || type == "fixechoix" || type == "libre"){
 
 		var addCreneauxBtn = document.createElement('input');
