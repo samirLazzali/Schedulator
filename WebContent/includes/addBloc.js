@@ -151,6 +151,7 @@ function blocFixe(type){
     	addCreneauxBtn.id = "addCreneauxBtn";
     	addCreneauxBtn.type = "button";
     	addCreneauxBtn.value = "Valider le créneaux";
+    	addCreneauxBtn.className = "btn btn-success";
     	addCreneauxBtn.onclick = function(){addCreneaux("choix");};
     	$(addCreneauxBtn).appendTo($(divBlocFixe));
 	}

@@ -13,7 +13,7 @@ public class Bloc {
     }
 
     public Bloc(String n, double duree, List<Horaire> listH){
-        nom = n;
+        nom = "@"+n;
         horaires = listH;
         this.duree = duree;
     }
@@ -34,7 +34,7 @@ public class Bloc {
      * @param nom the nom to set
      */
     public void setNom(String nom) {
-        this.nom = nom;
+        this.nom = "@"+nom;
     }
 
     /**

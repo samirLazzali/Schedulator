@@ -16,7 +16,7 @@
    	<h2 id="titreAddBloc"> Ajouter les blocs de votre emplois du temps : </h2>
    	<div id="divListBloc"></div>
    	<br>
-	<input type="button" class="btn btn-success" value=Commencer id="add" >
+	<input type="button" class="btn btn-primary" value=Commencer id="add" >
 
 </body>
 </html>

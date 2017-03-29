@@ -220,6 +220,7 @@ function submitBloc(){
 	addParamBtn.id = "add";
 	addParamBtn.type = "button";
 	addParamBtn.value = "+";
+	addParamBtn.style = "border-radius: 45px";
 	addParamBtn.onclick = function(){$("#add").replaceWith(createAddParam());};
     $("#addParam").replaceWith(addParamBtn);
 
@@ -227,6 +228,7 @@ function submitBloc(){
     valider.id = "val";
     valider.type = "button";
     valider.value = "Valider ";
+    valider.className = "btn  btn-success";
     valider.onclick = function(){
     	validationRedirect();
 	};
@@ -270,7 +272,6 @@ function validationRedirect(){
 function addCreneaux(type){
 	
 	if(document.getElementById("heureDebutH") != null && type == "validation"){
-		alert("pas verifier ! ");
 		var heureDebutInputH = document.getElementById("heureDebutH").value;
 		var heureDebutInputMin = document.getElementById("heureDebutMin").value;
 
@@ -349,6 +350,7 @@ function addCreneaux(type){
 		var subCreneauxBtn = document.createElement('input');
 		subCreneauxBtn.id = "subCreneauxBtn";
 		subCreneauxBtn.type = "button";
+		subCreneauxBtn.className = "btn btn-primary";
 		subCreneauxBtn.value = "Ajouter un creneau";
 		subCreneauxBtn.onclick = function(){
 			this.remove();
@@ -361,6 +363,7 @@ function addCreneaux(type){
 		addParamBtn.id = "addParamBtn";
 		addParamBtn.type = "button";
 		addParamBtn.value = "Valider le bloc";
+		addParamBtn.className = "btn btn-success";
 		addParamBtn.onclick = function(){submitBloc();};
 		$("#brCreneaux").after($(addParamBtn));
 			
