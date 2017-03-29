@@ -77,7 +77,7 @@ function refreshListBloc(){
 
 	var divListBlocAffichage = document.createElement('div');
 	for (i = 0; i < listDeBloc.length ; i++){
-    	var x = document.createElement("li");
+		var x = document.createElement("li");
     	x.className = "list-group-item";
     	x.innerHTML = listDeBloc[i];
     	$(x).appendTo($(divListBlocAffichage));
@@ -152,6 +152,60 @@ function changeCombo(){
 
 //clic pour valider la saisie du bloc
 function submitBloc(){
+	var err = [];
+	
+	if(document.getElementById("addParamName").value == ""){
+		err[0] = [1];
+		document.getElementById("addParamName").style.border = "1px solid red";
+		alert("Le nom du bloc ne peut pas rester vide");
+	}else{
+		document.getElementById("addParamName").style.border = "1px solid green";
+	}
+	
+	if(document.getElementById("duree").value == ""){
+		err[1] = [1];
+		alert("La durée du bloc ne peut pas rester vide");
+		document.getElementById("duree").style.border = "1px solid red";
+	}else{
+		document.getElementById("duree").style.border = "1px solid green";
+	}
+	if(document.getElementById("heureDebutH") != null){
+			
+		if(document.getElementById("heureDebutH").value == "" || document.getElementById("heureDebutMin").value == ""){
+			err[2] = [1];
+			document.getElementById("heureDebutH").style.border = "1px solid red";
+			document.getElementById("heureDebutMin").style.border = "1px solid red";
+			alert("L'heure de debut ne peut pas rester vide");
+		}else{
+			document.getElementById("heureDebutH").style.border = "1px solid green";
+			document.getElementById("heureDebutMin").style.border = "1px solid green";		
+		}
+		if(document.getElementById("heureFinH").value == "" || document.getElementById("heureFinMin").value == ""){
+			err[3] = [1];
+			document.getElementById("heureFinH").style.border = "1px solid red";
+			document.getElementById("heureFinMin").style.border = "1px solid red";
+			alert("L'heure de fin ne peut pas rester vide");
+		}else{
+			document.getElementById("heureFinH").style.border = "1px solid green";
+			document.getElementById("heureFinMin").style.border = "1px solid green";		}
+		
+		var e = document.getElementById("blocFixeCombo");
+	    var jour = e.options[e.selectedIndex].value;
+		if(jour == ""){
+			err[4] = [1];
+			document.getElementById("blocFixeCombo").style.border = "1px solid red";
+			alert("Veuillez selectionner un jour");
+		}else{
+			document.getElementById("blocFixeCombo").style.border = "1px solid green";
+
+		}
+	}
+	if(err.length > 0 ){
+		return;
+	}
+	
+    
+			
 	addCreneaux("validation");
 	var blocNom = document.getElementById("addParamName").value;
 	var blocDuree = document.getElementById("duree").value;
@@ -214,9 +268,9 @@ function validationRedirect(){
 //addcreneaux("choix") => pour ajouter plusieur crenaux
 //"validation" => ne remplis pas al list d'ho
 function addCreneaux(type){
-
 	
 	if(document.getElementById("heureDebutH") != null && type == "validation"){
+		alert("pas verifier ! ");
 		var heureDebutInputH = document.getElementById("heureDebutH").value;
 		var heureDebutInputMin = document.getElementById("heureDebutMin").value;
 
@@ -235,21 +289,49 @@ function addCreneaux(type){
 		refreshListHoraire();
 	}
 	
-	
-	
-
 
 	if (type == "choix"){
+		var err = [];
+		if(document.getElementById("heureDebutH").value == "" || document.getElementById("heureDebutMin").value == ""){
+			err[2] = [1];
+			document.getElementById("heureDebutH").style.border = "1px solid red";
+			document.getElementById("heureDebutMin").style.border = "1px solid red";
+			alert("L'heure de debut ne peut pas rester vide");
+		}else{
+			document.getElementById("heureDebutH").style.border = "1px solid green";
+			document.getElementById("heureDebutMin").style.border = "1px solid green";		
+		}
+		if(document.getElementById("heureFinH").value == "" || document.getElementById("heureFinMin").value == ""){
+			err[3] = [1];
+			document.getElementById("heureFinH").style.border = "1px solid red";
+			document.getElementById("heureFinMin").style.border = "1px solid red";
+			alert("L'heure de fin ne peut pas rester vide");
+		}else{
+			document.getElementById("heureFinH").style.border = "1px solid green";
+			document.getElementById("heureFinMin").style.border = "1px solid green";		}
+		
+		var e = document.getElementById("blocFixeCombo");
+	    var jour = e.options[e.selectedIndex].value;
+		if(jour == ""){
+			err[4] = [1];
+			document.getElementById("blocFixeCombo").style.border = "1px solid red";
+			alert("Veuillez selectionner un jour");
+		}else{
+			document.getElementById("blocFixeCombo").style.border = "1px solid green";
+
+		}
+		
+		if(err.length > 0 ){
+			return;
+		}
+
+		
 		var heureDebutInputH = document.getElementById("heureDebutH").value;
 		var heureDebutInputMin = document.getElementById("heureDebutMin").value;
 
 		var heureFinInputH = document.getElementById("heureFinH").value;
 		var heureFinInputMin  = document.getElementById("heureFinMin").value;
-
-		var e = document.getElementById("blocFixeCombo");
-	    var jour = e.options[e.selectedIndex].value;
-	    
-		//+ selecteed index
+	//+ selecteed index
 	    var strDeb = heureDebutInputH+"H"+heureDebutInputMin;
 	    var strFin = heureFinInputH+"H"+heureFinInputMin;
 
@@ -282,8 +364,6 @@ function addCreneaux(type){
 		addParamBtn.onclick = function(){submitBloc();};
 		$("#brCreneaux").after($(addParamBtn));
 			
-	}else{
-		
 	}
 	
 

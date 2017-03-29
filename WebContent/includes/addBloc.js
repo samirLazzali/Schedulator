@@ -26,12 +26,12 @@ function blocFixe(type){
 		
 		//div label + input durée 
 		var divLabInputDuree = document.createElement('div');
-		divLabInputDuree.className = 'form-group';
+		divLabInputDuree.className = 'form-group';	
 		divLabInputDuree.id = "divLabInputDuree";
 
 		var label = document.createElement('label');
 		label.htmlFor = 'duree';
-				label.innerHTML = "Durée : ";
+		label.innerHTML = "Durée : ";
 		$(label).appendTo($(divLabInputDuree));
 		//input
 		var input = document.createElement('input');
@@ -47,13 +47,14 @@ function blocFixe(type){
 		var divListHoraire = document.createElement('div');
 		divListHoraire.id = 'divListHoraire';
 		$(divListHoraire).appendTo($(divBlocFixe));
-
 	}
 
 	//div label + input HeureDebut 
+	
 	var divLabInputHeureDebut = document.createElement('div');
-	divLabInputHeureDebut.className = 'form-group';
+	divLabInputHeureDebut.className = "form-inline";
 	divLabInputHeureDebut.id = "divLabInputHeureDebut";
+	
 	//label
 	var label = document.createElement('label');
 	label.htmlFor = 'heureDebut';
@@ -65,9 +66,6 @@ function blocFixe(type){
 	}
 	$(label).appendTo($(divLabInputHeureDebut));
 	//input
-	var divNum1 = document.createElement('div');
-	divNum1.className = "row";
-	
 	var input = document.createElement('input');
 	input.type = 'number';
 	input.id = "heureDebutH";
@@ -75,17 +73,16 @@ function blocFixe(type){
 	input.max="23";
 	input.step ="1";
 
-	$(input).appendTo($(divNum1));
-	divNum1.append("H");
+	$(input).appendTo($(divLabInputHeureDebut));
+	divLabInputHeureDebut.append("H");
 	var input = document.createElement('input');
 	input.type = 'number';
 	input.id = "heureDebutMin";
 	input.min= '0';
 	input.max="45";
 	input.step ="15";
-	$(input).appendTo($(divNum1));
+	$(input).appendTo($(divLabInputHeureDebut));
 
-	$(divNum1).appendTo($(divLabInputHeureDebut));
 	//manque le placeholder !
 	//ajout du div (l + i) au div principal 
 	$(divLabInputHeureDebut).appendTo($(divBlocFixe));
@@ -106,8 +103,7 @@ function blocFixe(type){
 	$(label).appendTo($(divLabInputHeureFin));
 	//input
 	
-	var divNum1 = document.createElement('div');
-	divNum1.className = "row";
+
 	
 	var input = document.createElement('input');
 	input.type = 'number';
@@ -115,17 +111,15 @@ function blocFixe(type){
 	input.min= '0';
 	input.max="23";
 	input.step ="1";
-	$(input).appendTo($(divNum1));
-	divNum1.append("H");
+	$(input).appendTo($(divLabInputHeureFin));
+	divLabInputHeureFin.append("H");
 	var input = document.createElement('input');
 	input.type = 'number';
 	input.id = "heureFinMin";
-	input.min= '0';
+	input.min= '0';	
 	input.max="45";
 	input.step ="15";
-	$(input).appendTo($(divNum1));
-
-	$(divNum1).appendTo($(divLabInputHeureFin));
+	$(input).appendTo($(divLabInputHeureFin));
 	
 	$(divLabInputHeureFin).appendTo($(divBlocFixe));
 

@@ -62,6 +62,20 @@ public class CreateEdt extends HttpServlet {
 			blocTmp.setHoraires(horaireTmp);
 			listBloc.add(blocTmp);
 		}
+		for (Bloc b : listBloc){
+			//je recupere l'heure de je split dans hdeb avec hdeb[0] = heure et hdeb[1] = minutes 
+			String [] hdeb = b.getHoraires().get(0).getHeureDebut().split("H"); 
+			//je multiplie les heure par 60 pour les avoir en minutes et j'additionne les minutes => le totale en minutes !!
+			int debutMinutes = Integer.parseInt(hdeb[0])*60 + Integer.parseInt(hdeb[1]);
+			//de meme pour l'heur de fin 
+			String [] hfin = b.getHoraires().get(0).getHeureDebut().split("H");
+			int finMinutes = Integer.parseInt(hfin[0])*60 + Integer.parseInt(hfin[1]);
+			Double duree = b.getDuree();
+			if(debutMinutes + duree != finMinutes){
+				//l'heure de debut + la durée et differente de l'heure de fin => bloc libre 
+				// il fait faire la suite ici pour ajouter plusieur craineaux horraire
+			}			
+		}
 		
 		//1 = compacte  lunid
 		//2 min cours

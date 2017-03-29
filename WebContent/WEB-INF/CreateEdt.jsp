@@ -11,12 +11,12 @@
 <script type="text/javascript" src="/Schedulator/includes/CreateEdt.js"></script>
 <title>Créer un emplois du temps </title>
 </head>
-<body class="container">
+<body class="container text-center">
    	
    	<h2 id="titreAddBloc"> Ajouter les blocs de votre emplois du temps : </h2>
    	<div id="divListBloc"></div>
    	<br>
-	<input type="button" value="add" id="add" >
+	<input type="button" class="btn btn-success" value=Commencer id="add" >
 
 </body>
 </html>
